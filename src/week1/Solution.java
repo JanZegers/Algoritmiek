@@ -14,19 +14,56 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class Solution {
-	private Set stadlijst;
-	private Set namenlijst;
+	
+	private int counter;
+
 	public Solution(File in) {
-		stadlijst = new HashSet();
-		namenlijst = new HashSet();
-		
-		ArrayList<Student> lijst = new ArrayList<Student>();
+
+		ArrayList<Student> listStudents = new ArrayList<Student>();
 		try {
-			lijst = run(in);
+			listStudents = run(in);
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	      System.out.println("*** Before sorting:");
+	      
+	        for (Student student : listStudents) {
+	            System.out.println(student);
+	        }
+
+
+	        Collections.sort(listStudents, new StudentNameComparator());
+	        Collections.sort(listStudents, new StudentCityComparator());
+	        
+	        
+	        ArrayList<Student> listStudentsNew = new ArrayList<Student>();
+
+	        System.out.println("\n*** After sorting:");
+	        Student studentOld = new Student(0, "a", " a" );
+	        counter = 1;
+	        for (Student student : listStudents) {
+	        	
+	        	if(student.getCity().equals(studentOld.getCity()) && student.getName().equals(studentOld.getName())){
+	        			counter += 1;
+	        			//System.out.println(" ik ben hier");
+	        	}
+	        	else{
+	        		if(studentOld.getId()!=0){
+	        			System.out.println(counter);
+	        		}
+	        		//System.out.println(studentOld + " is oude dt");
+	        		System.out.print(student  + " ");
+	        		studentOld = student;
+	        		
+	        		counter = 1;
+	        				
+	        	}
+	        	
+	        }
+	        
 		
 		
 	
@@ -51,14 +88,14 @@ public class Solution {
 				sc.nextLine();
 				int studentnr = sc.nextInt();
 				String stad = sc.next();
-				stadlijst.add(stad);
+				//stadlijst.add(stad);
 				String naam = sc.next();
-				namenlijst.add(naam);
+				//namenlijst.add(naam);
 				
 				
 				Student temp = new Student(studentnr, stad, naam);
 				result.add(temp);
-				System.out.println(temp);
+				
 			}
 				
 			
