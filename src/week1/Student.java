@@ -6,7 +6,7 @@ public class Student {
 	private int id;
     private String name;
     private String city;
-    private int nameOccurance = 1;
+
  
     public Student(int id, String city, String name) {
         this.name = name;
@@ -18,7 +18,7 @@ public class Student {
     // getters and setters
  
     public String toString() {
-        return String.format(city + " " + name + " " + nameOccurance);
+        return String.format(city + " " + name);
     }
 
 	public int getId() {
@@ -45,11 +45,5 @@ public class Student {
 		this.city = city;
 	}
 	
-	public void setNameOccurance() {
-		this.nameOccurance++;
-	}
-	
-	public int getNameOccurance() {
-		return nameOccurance;
-	}
+
 }
